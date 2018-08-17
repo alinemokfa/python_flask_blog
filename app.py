@@ -31,12 +31,12 @@ def about():
 
 @app.route("/register")
 def register():
-    from = RegistrationForm()
+    form = RegistrationForm()
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login")
 def login():
-    from = LoginForm()
+    form = LoginForm()
     return render_template('login.html', title='Login', form=form)
 
 if __name__ == '__main__':
