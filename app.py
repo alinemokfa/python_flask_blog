@@ -1,5 +1,9 @@
 from flask import Flask, render_template, url_for
+from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
+
+# Below key is only an example. This key will be replaced by an env. variable once deployed.
+app.config['SECRET_KEY'] = '94557b91dc00450b6b32460246fcef8f'
 
 posts = [
     {
@@ -24,6 +28,11 @@ def home():
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
+
+@app.route("/register")
+def register():
+    from = RegistrationForm()
+    return render_template('register.html', title='Register', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
