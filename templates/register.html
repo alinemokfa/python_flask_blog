@@ -1,0 +1,14 @@
+
+{% extends "layout.html" %}
+{% block content %}
+      <div class="content-section">
+        <form method="POST" action="">
+          <!-- csrf token -->
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            
+          </fieldset>
+        </form>
+      </div>
+{% endblock content %}
