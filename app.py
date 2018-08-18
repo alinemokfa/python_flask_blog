@@ -6,7 +6,7 @@ from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
 # Below key is only an example. This key will be replaced by an env. variable once deployed.
 app.config['SECRET_KEY'] = '94557b91dc00450b6b32460246fcef8f'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -20,7 +20,6 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -30,23 +29,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
-
-
-#TODO Seeding to be deleted
-posts = [
-    {
-        'author': 'Aline M',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': '16 Aug 2018'
-    },
-    {
-        'author': 'Patrick C',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': '17 Aug 2018'
-    }
-]
 
 @app.route("/")
 @app.route("/home")
