@@ -1,3 +1,4 @@
+import secrets
 from flask import render_template, url_for, flash, redirect, request
 from flask_blog import app, db, bcrypt
 from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
@@ -62,11 +63,17 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        # if form.picture.data:
+
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
