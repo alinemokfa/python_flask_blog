@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from flask_blog import app, db, bcrypt
-from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flask_blog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -71,7 +71,7 @@ def save_picture(form_picture):
     _, f_text = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_text
     picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
-    # resize image before saving (using Pillow package) 
+    # resize image before saving (using Pillow package)
     output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
@@ -97,3 +97,9 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    return render_template('create_post.html', title='New Post', form=form)
