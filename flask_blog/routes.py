@@ -7,21 +7,6 @@ from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm, Pos
 from flask_blog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-posts = [
-    {
-        'author': 'Aline',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': '19 Aug 2018'
-    },
-    {
-        'author': 'Patrick',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': '19 Aug 2018'
-    }
-]
-
 @app.route("/")
 @app.route("/home")
 def home():
